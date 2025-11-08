@@ -1,6 +1,6 @@
 # Harvard CS50 2025 - Course Work
 
-My completed course work done for the Harvard CS50 2025 course.
+Completed course work for the [Harvard CS50 2025 course](https://cs50.harvard.edu/x/).
 
 ## Completed Weeks
 
