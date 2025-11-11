@@ -12,7 +12,7 @@
 
 ## Notes
 
-- currently at timestamp 1:32:54 of the video
+- currently at timestamp 1:41:31 of the video
 - common Linux terminal commands:
     - cd
     - cp
@@ -61,6 +61,12 @@
 - C loops
     - while loop
     - for loop
+- use `Ctrl + C` hotkey combo press to force quit a process running in the Bash terminal
+- declare function prototypes at the top of a C source code fine so:
+    - we can move the actual function body or definition to the bottom of the file
+    - we can call the function on a line before the line(s) that define the function
+- function prototype = the type / signature of the function;
+ - = return type + name + arguments
 
 ## Problem Set 1: a
 
