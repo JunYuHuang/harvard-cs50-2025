@@ -67,6 +67,21 @@
     - we can call the function on a line before the line(s) that define the function
 - function prototype = the type / signature of the function;
  - = return type + name + arguments
+- scope in C:
+    - variables generally exist in the function body
+- `return` value for functions
+- important things in programming (3):
+    - correctness
+    - design
+    - style
+- constants in C
+- comments in C
+- integer overflow
+- integer truncation
+- integer casting
+- floating-point imprecision
+- Y2K problem
+- Jan 19 2038 problem
 
 ## Problem Set 1: a
 
