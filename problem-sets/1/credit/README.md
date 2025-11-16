@@ -24,7 +24,7 @@
         - it is a Luhn number
     - a MASTERCARD number is valid IFF:
         - it is of length 16
-        - it has a numeric prefix from the set `{ 51, 52, 53, 54, 55}`
+        - it has a numeric prefix from the set `{ 51, 52, 53, 54, 55 }`
         - it is a Luhn number
     - a VISA number is valid IFF:
         - it is of length 13 or 16
@@ -40,4 +40,62 @@
 
 ## Solution 1
 
-- todo
+- `credit_card_number`: long int variable
+- get user input for `credit_card_number`
+    - if `credit_card_number` is not a valid long integer, loop again and ask again
+- if `is_luhn_checksum(credit_card_number)` returns false,
+    - print `INVALID`
+    - return
+- if `is_amex(credit_card_number)` returns true,
+    - print `AMEX`
+- else if `is_mastercard(credit_card_number)` returns true,
+    - print `MASTERCARD`
+- else if `is_visa(credit_card_number)` returns true,
+    - print `VISA`
+- else
+    - print `INVALID`
+- functions:
+    - `is_luhn_checksum(number)`:
+        - `number`: a long int
+        - `other_digits_sum`: a long int
+        - `digits_sum`: a long int
+        - `is_other_digit`: bool set to `false`
+        - `checksum`: a long into set to `0`
+        - while `number` != 0,
+            - `digit`: a long int returned from `number` % 10
+            - if `is_other_digit`,
+                - `product_sum` = 2 \* `digit`
+                - `checksum` = `checksum` + `sum_of_digits(product_sum)`
+            - else,
+                - `checksum` = `checksum` + `digit`
+            - `number` = `number` integer divided by 10
+        - a
+    - `sum_of_digits(number)`:
+        - `res`: a long int set to `0`
+        - while `number` != 0,
+            - `digit` = `number` % 10
+            - `res` = `res` + `digit`
+            - `number` = `number` integer divided by 10
+        - return `res`
+    - `count_digits(number)`:
+        - `number`: a long int
+        - `res`: an int set to `1`
+        - while `number` > 9,
+            - `number` = `number` / 10
+            - increment `res`
+        - return `res`
+    - `is_amex(number)`:
+        - `number`: a long int
+        - if `number` has 15 digits and its first 2 digits are `34` or `37`,
+            - return true
+        - return false
+    - `is_mastercard(number)`:
+        - `number`: a long int
+        - if `number` has 16 digits and its first 2 digits are from the set `{ 51, 52, 53, 54, 55 }`,
+            - return true
+        - return false
+    - `is_visa(number)`:
+        - `number`: a long int
+        - if `number` has 13 or 16 digits and its first digit is `4`,
+            - return true
+        - return false
