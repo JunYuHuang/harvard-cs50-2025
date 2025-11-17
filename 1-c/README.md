@@ -89,6 +89,6 @@
 - [x] complete 1 of:
     - [ ] [Mario (less)](https://cs50.harvard.edu/x/psets/1/mario/less/) OR
     - [x] [Mario (more)](https://cs50.harvard.edu/x/psets/1/mario/more/)
-- [ ] complete 1 of:
+- [x] complete 1 of:
     - [ ] [Cash](https://cs50.harvard.edu/x/psets/1/cash/) OR
-    - [ ] [Credit](https://cs50.harvard.edu/x/psets/1/credit/)
+    - [x] [Credit](https://cs50.harvard.edu/x/psets/1/credit/)
