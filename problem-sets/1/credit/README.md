@@ -57,8 +57,6 @@
 - functions:
     - `is_luhn_checksum(number)`:
         - `number`: a long int
-        - `other_digits_sum`: a long int
-        - `digits_sum`: a long int
         - `is_other_digit`: bool set to `false`
         - `checksum`: a long into set to `0`
         - while `number` != 0,
@@ -68,8 +66,11 @@
                 - `checksum` = `checksum` + `sum_of_digits(product_sum)`
             - else,
                 - `checksum` = `checksum` + `digit`
+            - `is_other_digit` = itself negated
             - `number` = `number` integer divided by 10
-        - a
+        - if `checksum` % 10 == 0,
+            - return true
+        - return false
     - `sum_of_digits(number)`:
         - `res`: a long int set to `0`
         - while `number` != 0,
@@ -84,8 +85,30 @@
             - `number` = `number` / 10
             - increment `res`
         - return `res`
+    - `first_n_digits(number, n)`:
+        - `number`: a long int
+        - `n`: an int
+        - if `n` < 1,
+            - return `-1`
+        - if `number` < 10,
+            - return `number`
+        - `i`: an int set to `count_digits(number)` - 1
+        - `multiplier`: an int set to `1`
+        - `res`: an int set to `0`
+        - while `number` != 0,
+            - if `i` < `n`,
+                - `digit`: an int set to value evaluated from `number` % 10
+                - `digit` = `digit` * `multiplier`
+                - `res` = `res` + `digit`
+                - `multiplier` = `multiplier` * 10
+            - `number` = `number` int divided by 10
+            - `i` = `i` - 1
+        - return `res`
     - `is_amex(number)`:
         - `number`: a long int
+        - `number_length`: a long int set to the value returned from `count_digits(number)`
+        - if `number_length` != 15,
+            - return false
         - if `number` has 15 digits and its first 2 digits are `34` or `37`,
             - return true
         - return false

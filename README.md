@@ -5,7 +5,7 @@ Completed course work for the [Harvard CS50 2025 course](https://cs50.harvard.ed
 ## Completed Weeks
 
 - [ ] Week 0 Scratch
-- [ ] Week 1 C
+- [x] Week 1 C
 - [ ] Week 2 Arrays
 - [ ] Week 3 Algorithms
 - [ ] Week 4 Memory
