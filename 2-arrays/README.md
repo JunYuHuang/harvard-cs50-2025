@@ -12,7 +12,7 @@
 
 ## Notes
 
-- at lecture YouTube video timestamp 40:22
+- at lecture YouTube video timestamp 2:03:25
 
 ## Problem Set 2
 
