@@ -1,0 +1,144 @@
+# Readability
+
+## General Notes
+
+- PEDAC: Problem
+    - inputs:
+        - `text`: a text string that represents a passage of reading text composed of words and sentences
+            - word = a series of alphabetical chars 
+                - are separated from each other by a single space ` ` char before and after the end of the word
+                - the first word in `text` does not have any leading space chars
+                - the last word in `text` ends with punctuation from the set `.`, `!`, `?`, `"`
+            - sentence =
+                - a series of words joined by space ` ` and other non-alphabetical chars from the set `,`, `.`, `;`, `:`, `!`, `?`, `"`
+                - a
+    - outputs:
+        - none
+    - side effects / mutations:
+        - prints a string indicating what reading level the inputted `text` is at
+        - reading level is a decimal rounded to the nearest integer
+        - reading level range = `[0, INF]`
+        - prints 1 of 3 types:
+            - `Before Grade 1` for reading levels < 1
+            - `Grade <x>` for reading level `x`
+            - `Grade 16+` for reading levels >= 16
+    - constraints / rules:
+        - use Coleman-Liau index formula to get the reading level of some text
+        - Coleman-Liau index (formula)
+            - = 0.0588 * L - 0.296 * S - 15.8
+            - `L` = average letter count of all words in `text` * 100
+            - `S` = average sentences in `text` * 100
+        - `text` string constraints:
+            - word = a series of alphabetical chars 
+                - are separated from each other by a single space ` ` char before and after the end of the word
+                - the first word in `text` does not have any leading space chars
+                - the last word in `text` ends with punctuation from the set `.`, `!`, `?`, `"`
+                - starts with an alphabetical char
+                - ends with an alphabetical char
+                - may have non-alphabetic chars in the middle of the world from the set `-`, `'`, 
+                - excluding the last word in a sentence, it may end or start with the punctuation chars from the set `,`, `.`, `;`, `:`, `"`
+                - the last word always ends with a punctuation char from the set `.`, `?`, `!`, or `"`?
+                - count of the letters in a word excludes any punctuation symbol chars
+                - = count of spaces in `text` + 1
+            - sentence =
+                - a series of words joined by space ` `
+                - if it is not the last sentence in `text`, it is always followed by a single space ` ` char that separates it from the next sentence
+                - if it is the last sentence, there is no following char after its last punctuation char
+                - contains 1+ words
+                - starting char will not be a space ` ` char
+                - ending char will not be a space ` ` char
+                - will not have 2+ space ` ` chars adjacent to each other
+- PEDAC: Examples
+    - skipped
+
+## Solution 1: brute force 3-pass 
+
+- get `text` string input from user
+- count the words in `text` returned from calling `count_words(text)`
+- count the letters in `text` returned from calling `count_words(text)`
+- count the sentences in `text` returned from calling `count_words(text)`
+- get Coleman-Liau index `index` returned from calling `coleman_liau_index()`
+- round the float `index` to the nearest integer
+- if `index` is < 0,
+    - print `Before Grade 1`
+- else if `index` is >= 16,
+    - print `Grade 16+`
+- else,
+    - print `Grade <index>` where `index` is an int in the range \[1, 15]
+- define helper functions:
+    - `coleman_liau_index(letters_count, sentences_count, words_count)`:
+        - set `average_letters_per_100_words` to the float returned from:
+            - `letters_count` / `words_count` * 100
+        - set `average_sentences_per_100_words` to the float returned from:
+            - `sentences_count` / `words_count` * 100
+        - return the float from the expression:
+            - (0.0588 * `average_letters_per_100_words`) - 
+            (0.296 * `average_sentences_per_100_words`) - 15.8
+    - `count_words(text)`:
+        - set `res` to the int `0`
+        - set `left` to the int `0`
+        - set `right` to the int `0`
+        - set `n` to length of string `text`
+        - while `left` <= `right` and `right` < `n`,
+            - if char `text[right]` is a space ` ` char,
+                - increment `res`
+                - `left` = `right` + 1
+            - increment `right`
+        - return `res`
+    - `count_letters(text)`: 
+        - set `res` to the int `0`
+        - loop thru every char `text[i]` in string `text`:
+            - if `text[i]` is NOT an alphabetical char,
+                - skip to next iteration
+            - increment `res`
+        - return `res`
+    - `count_sentences(text)`:
+        - set `res` to the int `0`
+        - loop thru every char `text[i]` in string `text`:
+            - if `text[i]` is the last char and is a char from the set { `!`, `"`, `?`, `.` }:
+                - increment `res`
+            - else if `text[i]` is NOT the last char, is a char from the set { `!`, `"`, `?`, `.` }, and the next char is a space ` ` char:
+                - increment `res`
+            - else:
+                - skip to next iteration / char
+        - return `res`
+
+## Solution 2: brute force 1-pass
+
+- get `text` string input from user
+- set `N` to int length of `text`
+- set `words_count` to int `1`
+- set `letters_count` to int `0`
+- set `sentences_count` to int `0`
+- loop thru every char `text[i]` in `text` for int index `i`:
+    - if `text[i]` is a space ` ` char,
+        - add `1` to `words_count`
+    - else if `text[i]` is an alphabetical char,
+        - add `1` to `letters_count`
+    - else if `text[i]` is an punctuation symbol char from the set { `?`, `!`, `.` },
+        - add `1` to `sentences_count`
+- get Coleman-Liau index `index` returned from calling `coleman_liau_index(words_count, letters_count, sentences_count)`
+- round the float `index` to the nearest integer
+- if `index` is < 0,
+    - print `Before Grade 1`
+- else if `index` is >= 16,
+    - print `Grade 16+`
+- else,
+    - print `Grade <index>` where `index` is an int in the range \[1, 15]
+- define helper functions:
+    - `coleman_liau_index(letters_count, sentences_count, words_count)`:
+        - set `average_letters_per_100_words` to the float returned from:
+            - `letters_count` / `words_count` * 100
+        - set `average_sentences_per_100_words` to the float returned from:
+            - `sentences_count` / `words_count` * 100
+        - return the float from the expression:
+            - (0.0588 * `average_letters_per_100_words`) - 
+            (0.296 * `average_sentences_per_100_words`) - 15.8
+    - `is_alphabetical_char(ch)`:
+        - if `ch` is a lowercase or uppercase alphabetical char,
+            - returns true
+        - else, returns false
+    - `is_ending_punctuation_char(ch)`:
+        - if `ch` is a char from the char set { `!`, `?`, `.` },
+            - return true
+        - return false

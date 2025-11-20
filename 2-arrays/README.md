@@ -17,7 +17,7 @@
 ## Problem Set 2
 
 - [x] complete [Scrabble](https://cs50.harvard.edu/x/psets/2/scrabble/)
-- [ ] complete [Readability](https://cs50.harvard.edu/x/psets/2/readability/)
+- [x] complete [Readability](https://cs50.harvard.edu/x/psets/2/readability/)
 - [ ] complete 1 of:
     - [ ] [Caesar](https://cs50.harvard.edu/x/psets/2/caesar/)
     - [ ] [Substitution](https://cs50.harvard.edu/x/psets/2/substitution/)
