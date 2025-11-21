@@ -1,0 +1,82 @@
+# Substitution
+
+## General Notes
+
+- PEDAC: Problem
+    - inputs:
+        - `encryption_key`: a string of 26-char length
+        - `plaintext`: a string of variable length
+    - outputs:
+        - none
+    - side effects / mutations:
+        - if `encryption_key` is wrong length,
+            - print `Key must contain 26 characters.` and exit program
+        - if run without exactly 1 command-line argument,
+            - print `Usage: ./substitution key` and exit program
+        - if a valid `encryption_key` is entered,
+            - print encrypted `plaintext` as ciphertext: `ciphertext: <ciphertext>`
+    - constraints / rules:
+        - `encryption_key` is case insensitive?
+        - must preserve upper / lower case of original `plaintext`
+- PEDAC: Examples
+    - skipped
+
+## Solution 1: brute force
+
+- set constant string `ORIGINAL_KEY` to `ABCDEFGHIJKLMNOPQRSTUVWXYZ`
+- set constant char `EMPTY_CHAR` to `''`
+- set constant int `ENCRYPTION_KEY_LENGTH` to `26`
+- set constant string `WAS_LOWER` to `"WAS_LOWER"`
+- set constant string `WAS_UPPER` to `"WAS_UPPER"`
+- if run without exactly 1 command-line argument,
+    - print `Usage: ./substitution key`
+    - return 1
+- get user string input for `encryption_key`
+- if `encryption_key` is not of length 26,
+    - print `Key must contain 26 characters.`
+    - return 1
+- if `encryption_key` contains any non-alphabetical chars,
+    - print `Key must contain alphabetical characters only.`
+    - return 1
+- if `encryption_key` contains any duplicate characters,
+    - print `Key cannot contain duplicate characters.`
+    - return 1
+- get user string input for `plaintext`
+- set string `ciphertext` to value returned from calling `encrypt(key, plaintext)`
+- print `ciphertext: <ciphertext value>`
+- return 0
+- define helper functions:
+    - `has_non_alpha_chars(text)`:
+        - for each char `text[i]` in string `text` using int index `i`,
+            - if `text[i]` is not an alphabetical char,
+                - return true
+        - return false
+    - `has_duplicate_chars(text)`:
+        - set int `N` to length of string `text`
+        - for int index `i` from `0` to `N - 2` inclusive,
+            - for int index `j` from `i + 1` to `N - 1` inclusive,
+                - if `text[i]` equals `text[j]`,
+                    - return true
+        - return false
+    - `encrypt(key, plaintext)`:
+        - set string `ciphertext` with length of string `plaintext`
+        - for each char `plaintext[i]` in `plaintext` using int index `i`,
+            - set string `original_case` to empty string
+            - if `plaintext[i]` is an uppercase letter char,
+                - set `original_case` to `WAS_UPPER`
+            - else if `plaintext[i]` is a lowercase letter char,
+                - set `original_case` to `WAS_LOWER`
+            - set char `ch` to `plaintext[i]`
+            - set char `uppercased_ch` to `ch` converted to uppercase
+            - set char `cipher_ch` to empty char
+            - for each char `ORIGINAL_KEY[j]` in string `ORIGINAL_KEY` using int index `j`,
+                - if `uppercased_ch` == `ORIGINAL_KEY[j]`,
+                    - if `original_case` == `WAS_UPPER`,
+                        - set `cipher_ch` to `encryption_key[j]`
+                    - else if `original_case` == `WAS_LOWER`,
+                        - set `cipher_ch` to `encryption_key[j]` converted to a lowercase letter char
+                    - break out of loop
+            - if `cipher_ch` == `EMPTY_CHAR`,
+                - set `cipher_ch` to `ch`
+            - append `cipher_ch` to `ciphertext`
+        - return `ciphertext`
