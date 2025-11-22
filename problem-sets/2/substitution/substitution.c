@@ -2,16 +2,13 @@
 #include <string.h>
 #include <ctype.h>
 #include <cs50.h>
+#include <stdlib.h>
 
-const string ORIGINAL_KEY = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const int ENCRYPTION_KEY_LENGTH = 26;
-const char EMPTY_CHAR;
-const string WAS_LOWER = "WAS_LOWER";
-const string WAS_UPPER = "WAS_UPPER";
 
 bool has_non_alpha_chars(string text);
 bool has_duplicate_chars(string text);
-string encrypt(string encryption_key, string plaintext);
+string encrypt(string key, string plaintext);
 
 int main(int argc, string argv[])
 {
@@ -21,18 +18,18 @@ int main(int argc, string argv[])
         return 1;
     }
     
-    string encryption_key = argv[1];
-    if (strlen(encryption_key) != ENCRYPTION_KEY_LENGTH)
+    string key = argv[1];
+    if (strlen(key) != ENCRYPTION_KEY_LENGTH)
     {
         printf("Key must contain %i characters.\n", ENCRYPTION_KEY_LENGTH);
         return 1;
     }
-    if (has_non_alpha_chars(encryption_key))
+    if (has_non_alpha_chars(key))
     {
         printf("Key must contain alphabetical characters only.\n");
         return 1;
     }
-    if (has_duplicate_chars(encryption_key))
+    if (has_duplicate_chars(key))
     {
         printf("Key must contain unique characters only.\n");
         return 1;
@@ -40,8 +37,12 @@ int main(int argc, string argv[])
 
     string plaintext = get_string("plaintext: ");
 
-    string ciphertext = encrypt(encryption_key, plaintext);
+    string ciphertext = encrypt(key, plaintext);
+
     printf("ciphertext: %s\n", ciphertext);
+
+    if (ciphertext) free(ciphertext);
+
     return 0;
 }
 
@@ -80,49 +81,39 @@ bool has_duplicate_chars(string text)
     return false;
 }
 
-string encrypt(string encryption_key, string plaintext)
+string encrypt(string key, string plaintext)
 {
     int N = strlen(plaintext);
-    char ciphertext[N + 1];
+    char *ciphertext = malloc(N + 1);
+
+    if (!ciphertext)
+    {
+        return NULL;    // if `malloc()` call failed
+    }
 
     for (int i = 0; i < N; i++)
     {
-        string original_case = "";
         char ch = plaintext[i];
-        char uppercased_ch = toupper(ch);
-        char cipher_ch = EMPTY_CHAR;
 
-        if (isupper(ch))
+        if (isalpha(ch))
         {
-            original_case = WAS_UPPER;
-        }
-        else if (islower(ch))
-        {
-            original_case = WAS_LOWER;
-        }
+            bool is_lower = islower(ch);
+            char uppercased_ch = toupper(ch);
 
-        for (int j = 0; j < ENCRYPTION_KEY_LENGTH; j++)
-        {
-            if (uppercased_ch == ORIGINAL_KEY[j])
-            {
-                if (original_case == WAS_UPPER)
-                {
-                    cipher_ch = toupper(encryption_key[j]);
-                }
-                else if (original_case == WAS_LOWER)
-                {
-                    cipher_ch = tolower(encryption_key[j]);
-                }
-                break;
-            }
-        }
+            // Get index / position in the alphabet from range [0, 25] inclusive
+            int alpha_index = uppercased_ch - 'A';
 
-        if (cipher_ch == EMPTY_CHAR)
-        {
-            cipher_ch = ch;
-        }
+            // Get cipherchar mapped to the original alphabetic mapped index
+            char cipher_ch = key[alpha_index];
 
-        ciphertext[i] = cipher_ch;
+            // Restore original case
+            ciphertext[i] = is_lower ? tolower(cipher_ch) : toupper(cipher_ch);
+        }
+        else
+        {
+            // leave non-alphabetical chars unchanged
+            ciphertext[i] = ch;
+        }
     }
 
     ciphertext[N] = '\0';
