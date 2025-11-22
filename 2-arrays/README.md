@@ -18,6 +18,6 @@
 
 - [x] complete [Scrabble](https://cs50.harvard.edu/x/psets/2/scrabble/)
 - [x] complete [Readability](https://cs50.harvard.edu/x/psets/2/readability/)
-- [ ] complete 1 of:
+- [x] complete 1 of:
     - [ ] [Caesar](https://cs50.harvard.edu/x/psets/2/caesar/)
-    - [ ] [Substitution](https://cs50.harvard.edu/x/psets/2/substitution/)
+    - [x] [Substitution](https://cs50.harvard.edu/x/psets/2/substitution/)
