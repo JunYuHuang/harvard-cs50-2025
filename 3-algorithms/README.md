@@ -12,9 +12,22 @@
 
 ## Notes
 
-- at video timestamp 40:19
+- at video timestamp 1:19:09
 - in C programming language:
     - don't use `==` equality comparison operator to compare strings
+    - use `strcmp()` function from `string.h` header for comparing 2 strings
+    - create `structures` i.e., `struts` as a data structure
+        - like the precursor to classes in OOP
+    - dot `.` operator to access members in a struct
+- data structure = container for multiple data types
+    - create `structures` i.e., `struts`
+- sorting
+    - sorting algorithms
+        - selection sort
+        - bubble sort
+        - merge sort
+- recursion
+- binary search 
 
 ## Problem Set 3
 
