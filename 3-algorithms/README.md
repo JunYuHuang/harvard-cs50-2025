@@ -32,7 +32,7 @@
 ## Problem Set 3
 
 - [ ] complete [Sort](https://cs50.harvard.edu/x/psets/3/sort/)
-- [ ] complete [Plurality](https://cs50.harvard.edu/x/psets/3/plurality/)
+- [x] complete [Plurality](https://cs50.harvard.edu/x/psets/3/plurality/)
 - [ ] complete 1 of:
     - [ ] [Runoff](https://cs50.harvard.edu/x/psets/3/runoff/)
     - [ ] [Tideman](https://cs50.harvard.edu/x/psets/3/tideman/)
