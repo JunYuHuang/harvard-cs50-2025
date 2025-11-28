@@ -1,0 +1,78 @@
+# Sort
+
+## General Notes
+
+- PEDAC: Problem
+    - inputs:
+        - `random5000`: a text file with 5000 positive integers each separated by a newline char in an unsorted order
+        - `random10000`: a text file with 10000 positive integers each separated by a newline char in an unsorted order
+        - `random50000`: a text file with 50000 positive integers each separated by a newline char in an unsorted order
+        - `sorted5000`: a text file with 5000 positive integers each separated by a newline char in ascending sorted order
+        - `sorted10000`: a text file with 10000 positive integers each separated by a newline char in ascending sorted order
+        - `sorted50000`: a text file with 50000 positive integers each separated by a newline char in ascending sorted order
+        - `reversed5000`: a text file with 5000 positive integers each separated by a newline char in a reversed order
+        - `reversed10000`: a text file with 10000 positive integers each separated by a newline char in a reversed order
+        - `reversed50000`: a text file with 50000 positive integers each separated by a newline char in a reversed order
+    - outputs:
+        - ?
+    - side effects / mutations:
+        - ?
+    - constraints / rules:
+        - determine which compiled `sort*` program corresponds to which of the 3 sorting algorithms
+        - a
+    - misc:
+        - `sort1`: a compiled C program that implements selection, bubble, or merge sort
+        - `sort2`: a compiled C program that implements selection, bubble, or merge sort
+        - `sort3`: a compiled C program that implements selection, bubble, or merge sort
+    - theories:
+        - by benchmark time, algorithms in descending runtime should be:
+            - merge sort
+            - selection sort
+            - bubble sort
+    - bubble sort:
+        - pseudocode algorithm:
+            - set `numbers` to a non-zero lengthed integer array
+            - set integer `n` to length of integer array
+            - repeat `n` times,
+                - for integer `i` from `0` to `n - 2`,
+                    - if `number[i]` and `numbers[i + 1]` are out of order,
+                        - swap them
+                    - if no swaps,
+                        - quit
+        - runtime complexity:
+            - worst case:
+                - = (n - 1) * (n - 1)
+                - = n^2 - 1n - 1n + 1
+                - = n^2 - 2n + 1
+                - = O(n^2)
+            - best case: O(n)
+    - merge sort:
+        - pseudocode algorithm:
+            - if only one number,
+                - quit
+            - else
+                - sort left half of numbers
+                - sort right half of numbers
+                - merge sorted halves
+        - runtime complexity:
+            - O(n * log2(n))
+    - selection sort:
+        - pseudocode algorithm:
+            - set `numbers` to a non-zero lengthed integer array
+            - set integer `n` to length of integer array
+            - for integer `i` from 0 to `n` - 1,
+                - find smallest number between `numbers[i]` and `number[n-1]`
+                - swap smallest number with `number[i]`
+        - runtime complexity:
+            - worst case:
+                - = (n - 1) + (n - 2) + (n - 3) + ... + 1
+                - = n (n - 1) / 2
+                - = (n^2 - n ) / 2
+                - = n^2 / 2 - n / 2
+                - = O(n^2)
+- PEDAC: Examples
+    - skipped
+
+## Solution 1: brute force
+
+- todo
