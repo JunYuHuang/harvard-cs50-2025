@@ -1,11 +1,21 @@
-sort1 uses: TODO
+sort1 uses: bubble sort
 
-How do you know?: TODO
+How do you know?: 
+- slowest algorithm with O(N^2) runtime complexity -> has slowest runtimes
 
-sort2 uses: TODO
 
-How do you know?: TODO
 
-sort3 uses: TODO
+sort2 uses: merge sort
 
-How do you know?: TODO
+How do you know?:
+- fastest algorithm with O(NLogN) runtime complexity -> has fastest runtimes
+
+
+
+sort3 uses: selection sort
+
+How do you know?:
+- medium fastest algorithm due to:
+    - process of elimination
+    - having O(N^2) runtime complexity
+- has medium runtimes between `sort2` and `sort1`
