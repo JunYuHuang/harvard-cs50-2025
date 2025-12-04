@@ -12,7 +12,7 @@
 
 ## Notes
 
-- at video timestamp 1:34:06
+- at video timestamp 2:05:21
 - in C programming language:
     - `&`: gets the memory address of a variable?
     - `*`: prefix it to the name of a variable to make the variable a pointer
@@ -33,10 +33,21 @@
     - memory leak
     - Valgrind = CLI tool for reviewing a C program for memory related issues
     - garbage values
+    - scope
+    - passing by value
+    - passing by reference (i.e., addresses)
+    - heap overflow
+    - stack overflow
+    - buffer overflow
+    - an array is a buffer of finite size
 - in Linux,
     - pipe terminal output to `less` command to paginate or limit the output from another command
         - e.g., `./garbage | less`
 
 ## Problem Set 4
 
-- [ ] todo
+- [ ] Complete [Volume](https://cs50.harvard.edu/x/psets/4/volume/)'
+- [ ] Complete 1 of:
+    - [ ] [Filter (more)](https://cs50.harvard.edu/x/psets/4/filter/less/)
+    - [ ] [Filter (less)](https://cs50.harvard.edu/x/psets/4/filter/more/)
+- [ ] Complete [Recover](https://cs50.harvard.edu/x/psets/4/recover/)
