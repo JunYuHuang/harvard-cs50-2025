@@ -40,6 +40,18 @@
     - stack overflow
     - buffer overflow
     - an array is a buffer of finite size
+    - file I/O
+        - I/O = Input / Output
+    - file I/O functions:
+        - fopen
+        - fclose
+        - fprintf
+        - fscanf
+        - fread
+        - ...
+    - check return values of functions
+    - file read / write functions is like playing a video / audio video in YouTube
+    - bitmap (BMP)
 - in Linux,
     - pipe terminal output to `less` command to paginate or limit the output from another command
         - e.g., `./garbage | less`
