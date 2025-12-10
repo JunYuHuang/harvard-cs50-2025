@@ -26,8 +26,11 @@
             - return false
         - if string `name` doesn't match a `name` field value of a struct item in array `candidates`,
             - return false
-        - update `candidates` array
-        - return true
+        - for each integer index `i` in array `candidates`,
+            - if `strcmp(name, candidates[i].name)` returns 0,
+                - set integer item at array `references[voter][rank]` to `i`
+                - return true
+        - return false
     - `tabulate()`:
         - return nothing; is of return type `void`
         - todo
@@ -39,3 +42,7 @@
 - [ ] Invalid votes for candidates who are not on the ballot
 - [ ] Printing the winner of the election if there is only one
 - [ ] Not eliminating anyone in the case of a tie between all remaining candidates
+
+## Done:
+
+- [ ] `vote()`
