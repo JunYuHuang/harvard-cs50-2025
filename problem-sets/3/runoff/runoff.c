@@ -143,37 +143,97 @@ bool vote(int voter, int rank, string name)
     return false;
 }
 
+// TODO - to test
 // Tabulate votes for non-eliminated candidates
 void tabulate(void)
 {
-    // TODO
-    return;
+    for (int i = 0; i < voter_count; i++)
+    {
+        int voted_candidate_index = preferences[i][0];
+        if (
+            voted_candidate_index >= 0 &&
+            voted_candidate_index < candidate_count
+        )
+        {
+            candidates[voted_candidate_index].votes++;
+        }
+    }
 }
 
+// TODO - to test
 // Print the winner of the election, if there is one
 bool print_winner(void)
 {
-    // TODO
+    int majority_vote_count = (voter_count / 2) + 1;
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (candidates[i].votes >= majority_vote_count)
+        {
+            printf("%s\n", candidates[i].name);
+            return true;
+        }
+    }
     return false;
 }
 
+// TODO - to test
 // Return the minimum number of votes any remaining candidate has
 int find_min(void)
 {
-    // TODO
-    return 0;
+    int min_votes = voter_count;
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (candidates[i].votes < min_votes)
+        {
+            min_votes = candidates[i].votes;
+        }
+    }
+    return min_votes;
 }
 
+// TODO - to test
 // Return true if the election is tied between all candidates, false otherwise
 bool is_tie(int min)
 {
-    // TODO
-    return false;
+    bool is_tieable = voter_count % candidate_count == 0;
+    if (!is_tieable) return false;
+
+    int votes_per_candidate_for_tie = voter_count / candidate_count;
+    if (min != votes_per_candidate_for_tie) return false;
+
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (candidates[i].votes != votes_per_candidate_for_tie)
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
+// TODO - to test
 // Eliminate the candidate (or candidates) in last place
 void eliminate(int min)
 {
-    // TODO
-    return;
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (candidates[i].votes > min) continue;
+
+        candidates[i].eliminated = true;
+
+        // Simulate removing the first item in `preferences[j]` for ballots that had their top preferred candidate eliminated
+        for (int j = 0; j < voter_count; j++)
+        {
+            if (preferences[j][0] != i) continue;
+            
+            for (int k = 1; k < candidate_count; k++)
+            {
+                preferences[j][k - 1] = preferences[j][k];
+            }
+
+            // Set last preferred candidate index to sentinel value `-1` which should be ignored
+            preferences[j][candidate_count - 1] = -1;
+        }
+    }
 }

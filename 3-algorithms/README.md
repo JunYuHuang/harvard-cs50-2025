@@ -33,6 +33,6 @@
 
 - [x] complete [Sort](https://cs50.harvard.edu/x/psets/3/sort/)
 - [x] complete [Plurality](https://cs50.harvard.edu/x/psets/3/plurality/)
-- [ ] complete 1 of:
-    - [ ] [Runoff](https://cs50.harvard.edu/x/psets/3/runoff/)
+- [x] complete 1 of:
+    - [x] [Runoff](https://cs50.harvard.edu/x/psets/3/runoff/)
     - [ ] [Tideman](https://cs50.harvard.edu/x/psets/3/tideman/)
