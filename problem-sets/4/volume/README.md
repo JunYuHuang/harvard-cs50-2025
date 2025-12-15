@@ -18,7 +18,7 @@
         - `.wav` file format anatomy = header + body
             - header = first 44 bytes
             - body = from the 45th byte to the end of the file
-                - an ordered list of 2-byte (i.e., 16-bit) integers
+                - an ordered list of 2-byte (i.e., 16-bit) signed (i.e., can be negative, 0, or positive) integers
                     - each int represents a timestamped audio signal
 - PEDAC: Examples
     - skipped

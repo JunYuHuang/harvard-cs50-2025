@@ -12,7 +12,6 @@
 
 ## Notes
 
-- at video timestamp 2:05:21
 - in C programming language:
     - `&`: gets the memory address of a variable?
     - `*`: prefix it to the name of a variable to make the variable a pointer
@@ -48,6 +47,8 @@
         - fprintf
         - fscanf
         - fread
+        - fwrite
+        - fseek
         - ...
     - check return values of functions
     - file read / write functions is like playing a video / audio video in YouTube
@@ -58,7 +59,7 @@
 
 ## Problem Set 4
 
-- [ ] Complete [Volume](https://cs50.harvard.edu/x/psets/4/volume/)'
+- [x] Complete [Volume](https://cs50.harvard.edu/x/psets/4/volume/)'
 - [ ] Complete 1 of:
     - [ ] [Filter (more)](https://cs50.harvard.edu/x/psets/4/filter/less/)
     - [ ] [Filter (less)](https://cs50.harvard.edu/x/psets/4/filter/more/)
