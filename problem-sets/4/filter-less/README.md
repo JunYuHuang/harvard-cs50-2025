@@ -32,10 +32,32 @@
     - for each pixel `pixel` (i.e., RGB triple struct in `image`) in the original image,
         - set int `sepiaPixel` to the floor of 1. the sum of sepia products times the original red, green and blue 8-bit int values rounded to the nearest int and 2. 255
         - set `pixel.pixel` to the value at `sepiaPixel`
+- `reflect(height, width, image)`:
+    - `height`: an int
+    - `width`: an int
+    - `image`: a 2D array of `RGB` structs of `height` arrays (i.e., rows) of `width` subarrays (i.e., columns)
+    - `RGB` struct: of 3 fields that are each an 8-bit int
+    - TLDR; horizontally flip the image
+    - swap each pixel column / item in each row of the image in-place
+    - for each int index `h` from 0 to `height` exclusive,
+        - set int index `l` to 0
+        - set int index `r` to `width - 1`
+        - while `l` < `r`,
+            - set BYTE int `temp` = `image[h][l]`
+            - set `image[h][l]` = `image[h][r]`
+            - set `image[h][r]` = `temp`
+            - increment `l` by 1
+            - decrement `r` by 1'
+- `blur()`: 
+    - `height`: an int
+    - `width`: an int
+    - `image`: a 2D array of `RGB` structs of `height` arrays (i.e., rows) of `width` subarrays (i.e., columns)
+    - `RGB` struct: of 3 fields that are each an 8-bit int
+    - todo
 
 ## Todos:
 
 - [x] Complete `grayscale()` function
 - [x] Complete `sepia()` function
-- [ ] Complete `reflect()` function
+- [x] Complete `reflect()` function
 - [ ] Complete `blur()` function
