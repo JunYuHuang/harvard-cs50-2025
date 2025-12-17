@@ -53,7 +53,31 @@
     - `width`: an int
     - `image`: a 2D array of `RGB` structs of `height` arrays (i.e., rows) of `width` subarrays (i.e., columns)
     - `RGB` struct: of 3 fields that are each an 8-bit int
-    - todo
+    - create a copy `image_copy` of the 2D array `image`
+    - for each int index `h` from 0 to `height - 1` inclusive,
+        - for each int index `r` from 0 to `width - 1` inclusive,
+            - 
+    - set `image` to `image_copy`
+    - define helper function:
+        - `blur_pixel_rgb(rgb, row, col, image)`:
+            - create 2D int array `offsets`:
+                - has 9 subarrays
+                - each subarray is a 2-sized int array containing the `x` (i.e., `row`) and `y` (i.e., `col`) coordinate offsets of a pixel in `image`
+                    - subarrays:
+                        - `[-1, -1]`, `[0, -1]`, `[1, -1]`, `[-1, 0]`, `[0, 0]`, `[1, 0]`, `[-1, 1]`, `[0, 1]`, `[1, 1]`
+            - set int `adj_pixel_count` to 0
+            - set int `red_sum` to 0
+            - set int `green_sum`to 0
+            - set int `blue_sum` to 0
+            - for each subarray `offset` in `offsets`,
+                - set int `offset_col` = `col` + `offset[0]`
+                - set int `offset_row` = `row` + `offset[1]`
+                - if `offset_col` is out-of-bounds,
+                    - skip to next iteration
+                - if `offset_row` is out-of-bounds,
+                    - skip to next iteration
+                - TODO
+                - increment `adj_pixel_count`by 1
 
 ## Todos:
 
