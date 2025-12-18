@@ -60,7 +60,7 @@
 ## Problem Set 4
 
 - [x] Complete [Volume](https://cs50.harvard.edu/x/psets/4/volume/)'
-- [ ] Complete 1 of:
+- [x] Complete 1 of:
     - [ ] [Filter (more)](https://cs50.harvard.edu/x/psets/4/filter/less/)
-    - [ ] [Filter (less)](https://cs50.harvard.edu/x/psets/4/filter/more/)
+    - [x] [Filter (less)](https://cs50.harvard.edu/x/psets/4/filter/more/)
 - [ ] Complete [Recover](https://cs50.harvard.edu/x/psets/4/recover/)
