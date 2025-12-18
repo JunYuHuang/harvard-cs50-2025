@@ -55,17 +55,18 @@
     - `RGB` struct: of 3 fields that are each an 8-bit int
     - create a copy `image_copy` of the 2D array `image`
     - for each int index `h` from 0 to `height - 1` inclusive,
-        - for each int index `r` from 0 to `width - 1` inclusive,
-            - 
+        - for each int index `w` from 0 to `width - 1` inclusive,
+            - set RGBTRIPLE `blurred_pixel` = `blur_pixel_rgb(image_copy, h, w)`
+            - set `image[h][w]` = `blurred_pixel`
     - set `image` to `image_copy`
     - define helper function:
-        - `blur_pixel_rgb(rgb, row, col, image)`:
+        - `blur_pixel_rgb(image, row, col)`:
             - create 2D int array `offsets`:
                 - has 9 subarrays
                 - each subarray is a 2-sized int array containing the `x` (i.e., `row`) and `y` (i.e., `col`) coordinate offsets of a pixel in `image`
                     - subarrays:
                         - `[-1, -1]`, `[0, -1]`, `[1, -1]`, `[-1, 0]`, `[0, 0]`, `[1, 0]`, `[-1, 1]`, `[0, 1]`, `[1, 1]`
-            - set int `adj_pixel_count` to 0
+            - set float `adj_pixel_count` to 0
             - set int `red_sum` to 0
             - set int `green_sum`to 0
             - set int `blue_sum` to 0
@@ -76,12 +77,19 @@
                     - skip to next iteration
                 - if `offset_row` is out-of-bounds,
                     - skip to next iteration
-                - TODO
+                - `red_sum` += `image[offset_row][offset_col].rgbtRed`
+                - `green_sum` += `image[offset_row][offset_col].rgbtGreen`
+                - `blue_sum` += `image[offset_row][offset_col].rgbtBlue`
                 - increment `adj_pixel_count`by 1
+            - initialize struct RGBTRIPLE `blurred_pixel`
+            - set `blurred_pixel.rgtRed` = `red_sum` / `adj_pixel_count` rounded to an int cast as an BYTE
+            - set `blurred_pixel.rgtGreen` = `green_sum` / `adj_pixel_count` rounded to an int cast as an BYTE
+            - set `blurred_pixel.rgtBlue` = `blue_sum` / `adj_pixel_count` rounded to an int cast as an BYTE
+            - return `blurred_pixel`
 
 ## Todos:
 
 - [x] Complete `grayscale()` function
 - [x] Complete `sepia()` function
 - [x] Complete `reflect()` function
-- [ ] Complete `blur()` function
+- [x] Complete `blur()` function
