@@ -63,4 +63,4 @@
 - [x] Complete 1 of:
     - [ ] [Filter (more)](https://cs50.harvard.edu/x/psets/4/filter/less/)
     - [x] [Filter (less)](https://cs50.harvard.edu/x/psets/4/filter/more/)
-- [ ] Complete [Recover](https://cs50.harvard.edu/x/psets/4/recover/)
+- [x] Complete [Recover](https://cs50.harvard.edu/x/psets/4/recover/)
