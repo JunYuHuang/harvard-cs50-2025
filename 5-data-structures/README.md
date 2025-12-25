@@ -53,5 +53,5 @@
 
 ## Problem Set 5
 
-- [ ] Complete [Inheritance](https://cs50.harvard.edu/x/psets/5/inheritance/)
+- [x] Complete [Inheritance](https://cs50.harvard.edu/x/psets/5/inheritance/)
 - [ ] Complete [Speller](https://cs50.harvard.edu/x/psets/5/speller/)
