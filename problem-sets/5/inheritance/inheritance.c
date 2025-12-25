@@ -39,6 +39,7 @@ int main(void)
 person *create_family(int generations)
 {
     // TODO: Allocate memory for new person
+    person *person0 = malloc(sizeof(person));
 
     // If there are still generations left to create
     if (generations > 1)
@@ -48,30 +49,52 @@ person *create_family(int generations)
         person *parent1 = create_family(generations - 1);
 
         // TODO: Set parent pointers for current person
+        person0->parents[0] = parent0;
+        person0->parents[1] = parent1;
 
         // TODO: Randomly assign current person's alleles based on the alleles of their parents
+        person0->alleles[0] = parent0->alleles[rand() % 2];
+        person0->alleles[1] = parent0->alleles[rand() % 2];
     }
 
     // If there are no generations left to create
     else
     {
         // TODO: Set parent pointers to NULL
+        person0->parents[0] = NULL;
+        person0->parents[1] = NULL;
 
         // TODO: Randomly assign alleles
+        person0->alleles[0] = random_allele();
+        person0->alleles[1] = random_allele();
     }
 
     // TODO: Return newly created person
-    return NULL;
+    return person0;
 }
 
 // Free `p` and all ancestors of `p`.
 void free_family(person *p)
 {
     // TODO: Handle base case
+    if (p == NULL)
+    {
+        return;
+    }
 
     // TODO: Free parents recursively
+    if (p->parents[0])
+    {
+        free(p->parents[0]);
+    }
+
+    if (p->parents[1])
+    {
+        free(p->parents[1]);
+    }
 
     // TODO: Free child
+    free(p);
 }
 
 // Print each family member and their alleles.
