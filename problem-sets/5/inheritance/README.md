@@ -1,4 +1,4 @@
-# Recover
+# Inheritance
 
 ## General Notes
 
