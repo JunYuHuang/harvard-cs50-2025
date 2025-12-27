@@ -1,0 +1,106 @@
+# Speller
+
+## General Notes
+
+- `load(dictionary)` function
+    - PEDAC: Problem 
+        - inputs:
+            - `dictionary`: a string representing the path to a text file of lowercased English words delimited by newline chars
+                - char range: { `a`..`z`, `\n` }
+        - outputs:
+            - returns true if `dictionary` could be loaded into the global `table` array of node pointers
+            - else returns false
+        - side effects / mutations:
+            - try to open the file `dictionary`
+                - if failed to open, return false
+            - set file pointer `file_dict` to the opened file of `dictionary`
+            - initialise char `ch`
+            - set integer `index` to 0
+            - initialise char array `word` to size `LENGTH + 1`
+            - while not at the end of file of `file_dict`,
+                - read the current char byte into buffer char pointer / array `char`
+                - if `char` is a newline char,
+                    - end the current string with a null byte char
+                        - `word[index]` = `'\0'`
+                    - set int `hashed_word` to result of `hash(word)`
+                    - if index `hashed_word` in array `table` references a non-null node,
+                        - traverse to the end of the linked list at `table[hashed_word]`
+                        - append a newly created node to the last node of that linked list
+                    - else,
+                        - point `table[hashed_word]` to a new node that contains `word`
+                    - `index = 0`
+                - else (`char` is an lowercase char),
+                    - `word[index]` = `char`
+                    - `index++`
+            - for every English word string `word` in `dictionary`,
+                - creates a new `node` struct for it that exists as part of a singly linked list that is pointed to by a `node` pointer item in array `table`
+                - if the hash integer for `word` exists in `table`,
+                    - append `word`'s node to the end of the linked list at index of the hash integer of `table`
+                - else,
+                    - create `word` as the head node or start of a linked list in `table` at index of `word`'s hash integer
+                    - set `word`'s node's `next` pointer to NULL
+            - return false at any point if we run into any errors (e.g., insufficient memory, error calling a function, etc.)
+        - constraints / rules:
+            - a
+    - PEDAC: Examples
+        - skipped
+- `hash(word)` function
+    - PEDAC: Problem 
+        - inputs:
+            - 
+        - outputs:
+            - a
+        - side effects / mutations:
+            - none
+        - constraints / rules:
+            - a
+    - PEDAC: Examples
+        - skipped
+- `size()` function
+    - PEDAC: Problem 
+        - inputs:
+            - 
+        - outputs:
+            - a
+        - side effects / mutations:
+            - none
+        - constraints / rules:
+            - a
+    - PEDAC: Examples
+        - skipped
+- `check(word)` function
+    - PEDAC: Problem 
+        - inputs:
+            - 
+        - outputs:
+            - a
+        - side effects / mutations:
+            - none
+        - constraints / rules:
+            - a
+    - PEDAC: Examples
+        - skipped
+- `unload()` function
+    - PEDAC: Problem 
+        - inputs:
+            - 
+        - outputs:
+            - a
+        - side effects / mutations:
+            - none
+        - constraints / rules:
+            - a
+    - PEDAC: Examples
+        - skipped
+
+## Solution 1: brute force
+
+- a
+
+## Todos
+
+- [x] `load(dictionary)` function
+- [ ] `hash(word)` function
+- [ ] `size()` function
+- [ ] `check(word)` function
+- [ ] `unload()` function 
