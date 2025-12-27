@@ -16,5 +16,6 @@ bool load(const char *dictionary);
 unsigned int size(void);
 bool unload(void);
 void print_dictionary(void);
+char* to_lowercase(const char *string);
 
 #endif // DICTIONARY_H

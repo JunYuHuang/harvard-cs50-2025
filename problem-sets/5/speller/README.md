@@ -95,10 +95,7 @@
 
 ## Solution 1: brute force
 
-- some bug with at least one of the following:
-    - `check()` function
-    - `load()` function
-    - stuck in an infinite loop when running the program
+- fixed bugs
 
 ## Todos
 
