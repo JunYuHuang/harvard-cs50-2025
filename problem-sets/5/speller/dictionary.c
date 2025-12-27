@@ -15,7 +15,7 @@ typedef struct node
 } node;
 
 // TODO: Choose number of buckets in hash table
-const unsigned int N = 26;
+const unsigned int N = 300;
 
 // Hash table
 node *table[N] = {NULL};
@@ -23,15 +23,21 @@ node *table[N] = {NULL};
 // Returns true if word is in dictionary, else false
 bool check(const char *word)
 {
-    // TODO
-    return false;
+    unsigned int hashed_word = hash(word);
+    return (table[hashed_word] == NULL) ? false : true;
 }
 
 // Hashes word to a number
 unsigned int hash(const char *word)
 {
-    // TODO: Improve this hash function
-    return toupper(word[0]) - 'A';
+    int sum = 0;
+    int word_len = (int)strlen(word);
+    for (int i = 0; i < word_len; i++)
+    {
+        sum += (int)word[i];
+    }
+
+    return (unsigned int) (sum % N);
 }
 
 // Loads dictionary into memory, returning true if successful, else false
@@ -91,19 +97,62 @@ bool load(const char *dictionary)
         index = 0;
     }
 
-    return false;
+    free(file_dict);
+    print_dictionary();
+    return true;
 }
 
 // Returns number of words in dictionary if loaded, else 0 if not yet loaded
 unsigned int size(void)
 {
-    // TODO
-    return 0;
+    unsigned int word_count = 0;
+    for (int i = 0; i < N; i++)
+    {
+        if (table[i] == NULL) continue;
+
+        node *curr = table[i];
+        while (curr)
+        {
+            word_count++;
+            curr = curr->next;
+        }
+    }
+    
+    return word_count;
 }
 
 // Unloads dictionary from memory, returning true if successful, else false
 bool unload(void)
 {
-    // TODO
-    return false;
+    for (int i = 0; i < N; i++)
+    {
+        if (table[i] == NULL) continue;
+
+        node *curr = NULL;
+        node *nxt = NULL;
+        for (curr = table[i]; curr != NULL; curr = nxt)
+        {
+            nxt = curr->next;
+            free(curr);
+        }
+    }
+    return true;
+}
+
+// debugger helper function 
+void print_dictionary(void)
+{
+    for (int i = 0; i < N; i++)
+    {
+        if (table[i] == NULL) continue;
+
+        printf("table[%i]: \n", i);
+        node *curr = NULL;
+        for (curr = table[i]; curr != NULL; curr = curr->next)
+        {
+            printf("'%s'", curr->word);
+            if (curr->next != NULL) printf(" -> ");
+        }
+        printf("\n\n");
+    }
 }

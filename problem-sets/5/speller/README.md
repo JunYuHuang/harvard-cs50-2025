@@ -95,12 +95,15 @@
 
 ## Solution 1: brute force
 
-- a
+- some bug with at least one of the following:
+    - `check()` function
+    - `load()` function
+    - stuck in an infinite loop when running the program
 
 ## Todos
 
 - [x] `load(dictionary)` function
-- [ ] `hash(word)` function
-- [ ] `size()` function
-- [ ] `check(word)` function
-- [ ] `unload()` function 
+- [x] `hash(word)` function
+- [x] `size()` function
+- [x] `check(word)` function
+- [x] `unload()` function 
