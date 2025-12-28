@@ -12,6 +12,7 @@
 
 ## Notes
 
+- at video timestamp 12:05
 - Python
     - an interpreted language
     - don't need to compile the source code to run a program
