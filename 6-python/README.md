@@ -12,10 +12,36 @@
 
 ## Notes
 
-- at video timestamp 12:05
-- Python
-    - an interpreted language
+- at video timestamp 40:00
+- Python: an interpreted language
     - don't need to compile the source code to run a program
+    - functions
+    - no semicolons to end statements
+    - don't need `\n` for newline chars when printing strings
+    - libraries AKA modules / packages
+    - `import cs50`
+    - `from cs50 import get_string`
+    - use `+` char for concatenation in strings
+    - variable / string interpolation with format strings
+    - no `main()` function
+    - no variable type specifiers
+    - positional parameters
+    - named parameters
+    - docs at: docs.python.org
+    - declare or enclose string literals with either single `''` or `""` double quotes
+    - types:
+        - bool
+        - float
+        - int
+        - str (strings)
+        - ...
+    - data structures
+        - range
+        - list
+        - tuple
+        - dict
+        - set
+        - ...
 
 ## Problem Set 6
 
