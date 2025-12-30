@@ -12,7 +12,7 @@
 
 ## Notes
 
-- at video timestamp 40:00
+- at video timestamp 1:01:26
 - Python: an interpreted language
     - don't need to compile the source code to run a program
     - functions
@@ -42,6 +42,19 @@
         - dict
         - set
         - ...
+    - conditionals
+    - str
+    - OOP; Object Oriented Programming
+        - methods
+    - loops
+    - truncation
+    - floating-point imprecision
+    - exceptions
+        - anti-pattern: put a bunch of code inside a try-catch block clause
+    - namespace: way to scope function / method names
+    - `sys` library
+    - `dict`: hash table data structure / library in Python
+    - exit statuses
 
 ## Problem Set 6
 
