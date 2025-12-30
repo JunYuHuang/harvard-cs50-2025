@@ -1,4 +1,4 @@
-# Sentimental Mario (More)
+# Sentimental Credit
 
 ## General Notes
 
