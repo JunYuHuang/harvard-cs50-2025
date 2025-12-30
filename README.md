@@ -16,3 +16,19 @@ Completed course work for the [Harvard CS50 2025 course](https://cs50.harvard.ed
 - [ ] Week 9 Flask
 - [ ] Week 10 The End
 - [ ] Artificial Intelligence
+
+## Misc
+
+### Python Virtual Environment (`.venv`) Notes
+
+Activate virtual environment:
+```bash
+cd harvard-cs50-2025
+source .venv/bin/activate
+```
+
+Deactive virtual environment:
+```bash
+cd harvard-cs50-2025
+deactivate
+```
