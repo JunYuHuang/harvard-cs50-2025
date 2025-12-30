@@ -12,7 +12,6 @@
 
 ## Notes
 
-- at video timestamp 1:01:26
 - Python: an interpreted language
     - don't need to compile the source code to run a program
     - functions
@@ -58,12 +57,12 @@
 
 ## Problem Set 6
 
-- [ ] Complete [Hello](https://cs50.harvard.edu/x/psets/6/hello/)
-- [ ] Complete 1 of:
+- [x] Complete [Hello](https://cs50.harvard.edu/x/psets/6/hello/)
+- [x] Complete 1 of:
     - [ ] [Mario (Less)](https://cs50.harvard.edu/x/psets/6/mario/less/)
-    - [ ] [Mario (More)](https://cs50.harvard.edu/x/psets/6/mario/more/)
-- [ ] Complete 1 of:
-    - [Cash](https://cs50.harvard.edu/x/psets/6/cash/)
-    - [Credit](https://cs50.harvard.edu/x/psets/6/credit/)
+    - [x] [Mario (More)](https://cs50.harvard.edu/x/psets/6/mario/more/)
+- [x] Complete 1 of:
+    - [ ] [Cash](https://cs50.harvard.edu/x/psets/6/cash/)
+    - [x] [Credit](https://cs50.harvard.edu/x/psets/6/credit/)
 - [ ] Complete [Readability](https://cs50.harvard.edu/x/psets/6/readability/)
 - [ ] Complete [DNA](https://cs50.harvard.edu/x/psets/6/dna/)
