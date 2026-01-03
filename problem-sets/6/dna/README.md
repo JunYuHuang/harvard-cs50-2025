@@ -38,3 +38,14 @@
     - print the string value of that key
 - else,
     - print `No match`
+
+## Tests
+
+- [x] `python dna.py databases/small.csv sequences/1.txt` -> `Bob`
+- [x] `python dna.py databases/small.csv sequences/2.txt` -> `No match`
+- [x] `python dna.py databases/small.csv sequences/3.txt` -> `No match`
+- [x] `python dna.py databases/small.csv sequences/4.txt` -> `Alice`
+- [x] `python dna.py databases/large.csv sequences/5.txt` -> `Lavender`
+- [x] `python dna.py databases/large.csv sequences/6.txt` -> `Luna`
+- ...
+- [x] `python dna.py databases/large.csv sequences/19.txt` -> `Fred`
