@@ -65,4 +65,4 @@
     - [ ] [Cash](https://cs50.harvard.edu/x/psets/6/cash/)
     - [x] [Credit](https://cs50.harvard.edu/x/psets/6/credit/)
 - [x] Complete [Readability](https://cs50.harvard.edu/x/psets/6/readability/)
-- [ ] Complete [DNA](https://cs50.harvard.edu/x/psets/6/dna/)
+- [x] Complete [DNA](https://cs50.harvard.edu/x/psets/6/dna/)

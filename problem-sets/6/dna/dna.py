@@ -18,17 +18,20 @@ def main():
         # remove the first value `name` of the CSV table header 
         strs.pop(0)
 
-        for row in reader:
-            name = row[0]
+        # build the `str_tuples_to_names` hashmap
+        for row_dict in reader:
+            name = ""
             str_counts = []
 
-            row_len = len(row)
-            for str_count in range(1, row_len):
-                str_counts.append(int(str_count))
+            for key in row_dict.keys():
+                if key == 'name':
+                    name = row_dict[key]
+                    continue
+                str_counts.append(int(row_dict[key]))
 
             # add the (int tuple, string) key-value pair to the hashmap
             str_tuples_to_names[tuple(str_counts)] = name
-    
+
     # TODO: Read DNA sequence file into a variable
     sample = ""
     with open(argv[2], "r") as sample_file:
