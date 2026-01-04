@@ -10,7 +10,12 @@
     - side effects / mutations:
         - a
     - constraints / rules:
-        - a
+        - can only modify the following helper functions and header files in the `tideman.c` C source file
+        - edge cases:
+            - an elections with a number of candidates in the range \[0, 9] inclusive
+            - voting for a candidate by name
+            - invalid votes for candidates not on the candidates list
+            - prinnts the election winner
     - misc:
         - Tideman voting mechanics:
             - create `n!` pairs / victories for `n` candidates
