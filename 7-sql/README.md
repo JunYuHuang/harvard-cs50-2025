@@ -12,7 +12,7 @@
 
 ## Notes
 
-- at video timestamp 34:01
+- at video timestamp: completed
 - CSV file: simple way to store data e.g., `favorites.csv`
 - Python `reader()` function is stateful; it remembers where in the file it is a like a cassette tape
 - flat file database e.g., CSV files
@@ -31,7 +31,7 @@
     - SQL commands and syntax
     - `sqlite3`: a SQL database
 - `sqlite3` commands:
-    ```
+    ```SQL
     sqlite3 DATABASE_NAME.db
     .mode csv
     .import FILE TABLE
@@ -40,9 +40,75 @@
     .headers on
 
     SELECT columns FROM table;
+
+    AVG
+    COUNT
+    DISTINCT
+    LOWER
+    MAX
+    MIN
+    UPPER
+    ...
+
+    GROUP BY
+    LIKE
+    LIMIT
+    ORDER BY
+    WHERE
+    ...
+
+    INSERT INTO table (column, ...) VALUES(values, ...)
+
+    NULL
+
+    DELETE FROM table WHERE condition;
+
+    UPDATE table SET column = value WHERE condition;
+
+    BLOB
+    INTEGER
+    NUMERIC
+    REAL
+    TEXT
+
+    NOT NULL
+    UNIQUE
+
+    PRIMARY KEY
+    FOREIGN KEY
+
+    JOIN
     ```
     - `.`-prefixed commands are `sqlite3` specific
+- more example `sqlite3` SQL commands:
+    ```SQL
+    SELECT title FROM shows, stars, people
+    WHERE shows.id = stars.show_id
+    AND people.id = stars.person_id
+    AND name = 'Steve Carrell';
+
+    .timer on
+
+    CREATE INDEX name ON table (column, ...);
+
+    BEGIN TRANSACTION
+    COMMIT
+    ROLLBACK
+    ```
+
 - database: software that stores and allows retrieval of data
+- IMDb
+- normalize data to reduce redundancy
+- one-to-one
+- primary key vs foreign key
+- one-to-many
+- many-to-many
+- indexes
+    - uses B-Tree data structure under the hood
+- SQL injection attacks
+    - fix: never trust user input e.g., use a trusted library for running SQL commands
+- race conditions
+    - fix: use database lock e.g. with transactions
 
 ## Problem Set 7
 
