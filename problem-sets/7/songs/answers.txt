@@ -4,10 +4,24 @@
 If `songs.db` contains the top 100 songs of one listener from 2018, how would you characterize their audio aura?
 
 ### Answer 1:
-TODO
+The audio aura is computed by running the following SQL query command:
+```SQL
+SELECT AVG(energy), AVG(valence), AVG(danceability) FROM songs;
+```
+
+This above query returns the following table result:
+```
++-------------+--------------+-------------------+
+| AVG(energy) | AVG(valence) | AVG(danceability) |
++-------------+--------------+-------------------+
+| 0.65906     | 0.484443     | 0.71646           |
++-------------+--------------+-------------------+
+```
+
+Based on this, the listener's audio aura is high energy, emotively sad to neutral, and is highly danceable.
 
 ## Question 2:
 Hypothesize about why the way you’ve calculated this aura might not be very representative of the listener. What better ways of calculating this aura would you propose?
 
 ### Answer 2:
-TODO
+The audio aura is based on the averages of the 3 number value properties of each song. If the listener listens to songs of varying genres or different categories, it may misrepresent the listener's audio aura by skewing certain values either very low or high. A better of calculating the aura could be based on the median of those 3 number values -- energy, valence, and danceability. 
