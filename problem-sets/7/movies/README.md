@@ -39,17 +39,17 @@ CREATE TABLE stars (
 
 ## Todos
 
-- [x] `1.sql`
-- [x] `2.sql`
-- [x] `3.sql`
-- [x] `4.sql`
-- [x] `5.sql`
-- [x] `6.sql`
-- [x] `7.sql`
-- [x] `8.sql`
-- [ ] `9.sql` (WIP)
-- [ ] `10.sql`
-- [ ] `11.sql`
-- [ ] `12.sql`
+- [x] `1.sql` (ok)
+- [x] `2.sql` (ok)
+- [x] `3.sql` (ok)
+- [x] `4.sql` (ok)
+- [x] `5.sql` (ok)
+- [x] `6.sql` (ok)
+- [ ] `7.sql` (wrong)
+- [x] `8.sql` (ok)
+- [ ] `9.sql` (wrong)
+- [x] `10.sql` (ok)
+- [ ] `11.sql` (wrong)
+- [ ] `12.sql` (wrong)
 - [ ] `13.sql`
 

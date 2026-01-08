@@ -1,8 +1,21 @@
 -- 9. Names of all people who starred in a movie released in 2004, ordered by birth year
-SELECT name FROM people
-INNER JOIN stars on people.id = stars.person_id
-INNER JOIN movies on stars.movie_id = movies.id
-WHERE year = 2004
-ORDER BY birth ASC;
+SELECT people.name FROM people
+WHERE people.id IN (
+    SELECT DISTINCT stars.person_id FROM stars
+    WHERE stars.movie_id IN (
+        SELECT movies.id FROM movies
+        WHERE movies.year = 2004
+    )
+)
+ORDER BY people.birth;
 
--- TODO: it hangs -> fix it
+-- check
+SELECT COUNT(people.name) FROM people
+WHERE people.id IN (
+    SELECT DISTINCT stars.person_id FROM stars
+    WHERE stars.movie_id IN (
+        SELECT movies.id FROM movies
+        WHERE movies.year = 2004
+    )
+)
+ORDER BY people.birth;
