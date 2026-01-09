@@ -45,11 +45,11 @@ CREATE TABLE stars (
 - [x] `4.sql` (ok)
 - [x] `5.sql` (ok)
 - [x] `6.sql` (ok)
-- [ ] `7.sql` (wrong)
+- [x] `7.sql` (ok)
 - [x] `8.sql` (ok)
-- [ ] `9.sql` (wrong)
+- [x] `9.sql` (ok)
 - [x] `10.sql` (ok)
-- [ ] `11.sql` (wrong)
-- [ ] `12.sql` (wrong)
+- [x] `11.sql` (ok)
+- [x] `12.sql` (ok)
 - [ ] `13.sql`
 
