@@ -51,5 +51,4 @@ CREATE TABLE stars (
 - [x] `10.sql` (ok)
 - [x] `11.sql` (ok)
 - [x] `12.sql` (ok)
-- [ ] `13.sql`
-
+- [x] `13.sql` (ok)

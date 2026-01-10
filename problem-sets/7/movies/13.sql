@@ -4,3 +4,26 @@
 - There may be multiple people named Kevin Bacon in the database. Be sure to only select the Kevin Bacon born in 1958.
 - Kevin Bacon himself should not be included in the resulting list.
 */
+SELECT DISTINCT people.name FROM people
+WHERE people.id IN (
+    SELECT stars.person_id FROM stars
+    WHERE (
+        stars.movie_id IN (
+            SELECT stars.movie_id FROM stars
+            WHERE stars.person_id = (
+                SELECT people.id FROM people
+                WHERE (
+                    people.name = 'Kevin Bacon' AND
+                    people.birth = 1958
+                )
+            )
+        ) AND
+        stars.person_id != (
+            SELECT people.id FROM people
+            WHERE (
+                people.name = 'Kevin Bacon' AND
+                people.birth = 1958
+            )
+        )
+    )
+);
