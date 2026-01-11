@@ -114,4 +114,4 @@
 
 - [x] Complete [Songs](https://cs50.harvard.edu/x/psets/7/songs/)
 - [x] Complete [Movies](https://cs50.harvard.edu/x/psets/7/movies/)
-- [ ] Complete [Fiftyville](https://cs50.harvard.edu/x/psets/7/fiftyville)
+- [x] Complete [Fiftyville](https://cs50.harvard.edu/x/psets/7/fiftyville)
