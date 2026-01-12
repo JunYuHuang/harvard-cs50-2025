@@ -153,4 +153,4 @@
 ## Problem Set 8
 
 - [x] Complete [Trivia](https://cs50.harvard.edu/x/psets/8/trivia/)
-- [ ] Complete [Homepage](https://cs50.harvard.edu/x/psets/8/homepage/)
+- [ ] ~~Complete [Homepage](https://cs50.harvard.edu/x/psets/8/homepage/)~~ (skipped)

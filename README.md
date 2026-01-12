@@ -12,7 +12,7 @@ Completed course work for the [Harvard CS50 2025 course](https://cs50.harvard.ed
 - [x] Week 5 Data Structures
 - [x] Week 6 Python
 - [x] Week 7 SQL
-- [ ] Week 8 HTML, CSS, JavaScript
+- [x] Week 8 HTML, CSS, JavaScript
 - [ ] Week 9 Flask
 - [ ] Week 10 The End
 - [ ] Artificial Intelligence
