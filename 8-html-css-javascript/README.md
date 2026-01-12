@@ -152,5 +152,5 @@
 
 ## Problem Set 8
 
-- [ ] Complete [Trivia](https://cs50.harvard.edu/x/psets/8/trivia/)
+- [x] Complete [Trivia](https://cs50.harvard.edu/x/psets/8/trivia/)
 - [ ] Complete [Homepage](https://cs50.harvard.edu/x/psets/8/homepage/)
