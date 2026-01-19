@@ -42,8 +42,69 @@ def index():
 @login_required
 def buy():
     """Buy shares of stock"""
-    return apology("TODO")
 
+    # GET route
+    if request.method == "GET":
+        user_rows = db.execute(
+            "SELECT cash FROM users WHERE id = ?",
+            session["user_id"]
+        )
+        cash = float(user_rows[0]["cash"])
+        return render_template("buy.html", usd=usd, cash=cash)
+
+    # POST route
+    if request.method == "POST":
+
+        # Validate stock `symbol` form field
+        symbol = request.form.get("symbol")
+        if len(symbol) == 0:
+            return apology("Stock symbol cannot be blank")
+
+        stock = lookup(symbol)
+        if not stock:
+            return apology(f"Stock symbol '{symbol}' does not exist")
+
+        # Validate stock `shares` form field
+        shares = request.form.get("shares")
+        if not shares or not shares.isdigit():
+            return apology("Invalid share amount")
+
+        shares = int(shares)
+        if shares < 1:
+            return apology("Must buy at least 1 share")
+
+        # Stop transaction if user has insufficient funds
+        user_rows = db.execute(
+            "SELECT cash FROM users WHERE id = ?",
+            int(session["user_id"])
+        )
+        cash = float(user_rows[0]["cash"])
+        total_price = stock["price"] * shares
+        if total_price > cash:
+            return apology(
+                f"Insufficient cash ({usd(cash)}) for buying {shares} share(s) of '{symbol}' at {usd(stock['price'])} per share"
+            )
+
+        # Complete the buy transaction
+        db.execute(
+            "UPDATE users SET cash = (cash - ?) WHERE id = ?",
+            total_price,
+            int(session["user_id"])
+        )
+
+        db.execute(
+            """
+            INSERT INTO user_transactions(
+                user_id, action, stock_symbol, shares
+            )
+            VALUES(?, 'buy', ?, ?);
+            """,
+            int(session["user_id"]),
+            symbol,
+            shares
+        )       
+
+        return redirect("/")
 
 @app.route("/history")
 @login_required
@@ -106,14 +167,72 @@ def logout():
 @login_required
 def quote():
     """Get stock quote."""
-    return apology("TODO")
 
+    # GET route
+    if request.method == "GET":
+        return render_template("quote.html")
+
+    # POST route
+    if request.method == "POST":
+
+        # Validate `symbol` field
+        symbol = request.form.get("symbol")
+
+        if len(symbol) == 0:
+            return apology("Stock symbol cannot be blank")
+
+        stock = lookup(symbol)
+        if not stock:
+            return apology(f"Stock symbol '{stock}' does not exist")
+
+        return render_template("quoted.html", stock=stock, usd=usd)
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
-    return apology("TODO")
 
+    # Forget any user_id
+    session.clear()
+
+    # GET route
+    if request.method == "GET":
+        return render_template("register.html")
+
+    # POST route
+    if request.method == "POST":
+
+        # Validate `username` field
+        username = request.form.get("username")
+
+        if len(username) == 0:
+            return apology("Username cannot be blank")
+
+        rows = db.execute("SELECT COUNT(*) FROM users WHERE username = ?", username)
+        if int(rows[0]["COUNT(*)"]) > 0:
+            return apology("Username already exists")
+
+        # Validate `password` and `confirmation` fields
+        password = request.form.get("password")
+        confirmation = request.form.get("confirmation")
+
+        if len(password) == 0 or len(confirmation) == 0:
+            return apology("Password or confirmed password cannot be blank")
+
+        if password != confirmation:
+            return apology("Confirmed password does not match password")
+
+        # Add new user to database
+        password_hash = generate_password_hash(password)
+        try:
+            res = db.execute(
+                "INSERT INTO users (username, hash) VALUES(?, ?)",
+                username, password_hash
+            )
+        except ValueError as e:
+            return apology("Username already exists or error adding user")
+
+        # Redirect user to home page
+        return redirect("/")
 
 @app.route("/sell", methods=["GET", "POST"])
 @login_required
