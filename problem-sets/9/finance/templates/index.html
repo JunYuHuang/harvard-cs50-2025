@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <h1 class="mb-3">Your Portfolio</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Symbol</th>
+                <th scope="col">Shares</th>
+                <th scope="col">Price</th>
+                <th scope="col">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in stocks %}
+                <tr>
+                    <td>{{ stock["symbol"] }}</td>
+                    <td>{{ stock["shares"] }}</td>
+                    <td>{{ usd(stock["price"]) }}</td>
+                    <td>{{ usd(stock["holding_value"]) }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col">Cash</th>
+                <td scope="col">{{ usd(cash) }}</td>
+            </tr>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col">Total</th>
+                <td scope="col">{{ usd(total) }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

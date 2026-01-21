@@ -35,8 +35,40 @@ def after_request(response):
 @login_required
 def index():
     """Show portfolio of stocks"""
-    return apology("TODO")
 
+    # GET route
+    if request.method == "GET":
+        
+        # Get all stocks and their share counts owned by the user
+        owned_stocks = db.execute(
+            """
+            SELECT stock_symbol AS symbol, shares
+            FROM user_stocks
+            WHERE user_id = ?;
+            """,
+            int(session["user_id"])
+        )
+
+        # Fetch the current price for each owned stock and update the array of stock info hashmaps
+        total_holding_value = 0
+        for owned_stock in owned_stocks:
+            stock = lookup(owned_stock["symbol"])
+            holding_value = stock["price"] * owned_stock["shares"]
+            total_holding_value += holding_value
+            owned_stock["price"] = stock["price"]
+            owned_stock["holding_value"] = holding_value
+
+        # Render the page
+        cash = db.execute(
+            "SELECT cash FROM users WHERE id = ?",
+            int(session["user_id"])
+        )
+        cash = cash[0]["cash"]
+        total = cash + total_holding_value
+
+        return render_template(
+            "index.html", stocks=owned_stocks, cash=cash, total=total, usd=usd
+        )
 
 @app.route("/buy", methods=["GET", "POST"])
 @login_required
@@ -60,6 +92,7 @@ def buy():
         if len(symbol) == 0:
             return apology("Stock symbol cannot be blank")
 
+        symbol = symbol.upper()
         stock = lookup(symbol)
         if not stock:
             return apology(f"Stock symbol '{symbol}' does not exist")
@@ -85,23 +118,60 @@ def buy():
                 f"Insufficient cash ({usd(cash)}) for buying {shares} share(s) of '{symbol}' at {usd(stock['price'])} per share"
             )
 
-        # Complete the buy transaction
+        # Deduct stock purchase from user's cash account
         db.execute(
             "UPDATE users SET cash = (cash - ?) WHERE id = ?",
             total_price,
             int(session["user_id"])
         )
 
+        # Add a record if the user doesn't own the share already
+        rows = db.execute(
+            """
+            SELECT COUNT(*) FROM user_stocks
+            WHERE user_id = ? AND stock_symbol = ?;
+            """,
+            int(session["user_id"]),
+            symbol
+        )
+        has_no_shares = rows[0]["COUNT(*)"] < 1
+
+        if has_no_shares:
+            db.execute(
+                """
+                INSERT INTO user_stocks (
+                    user_id, stock_symbol, shares
+                )
+                VALUES (?, ?, 0)
+                """,
+                int(session["user_id"]),
+                symbol
+            )
+
+        # Record the number of shares purchased under the user
+        db.execute(
+            """
+            UPDATE user_stocks
+            SET shares = (shares + ?)
+            WHERE user_id = ? AND stock_symbol = ?;
+            """,
+            shares,
+            int(session["user_id"]),
+            symbol
+        )
+
+        # Log the stock purchase transaction
         db.execute(
             """
             INSERT INTO user_transactions(
-                user_id, action, stock_symbol, shares
+                user_id, action, stock_symbol, shares, price
             )
-            VALUES(?, 'buy', ?, ?);
+            VALUES(?, 'buy', ?, ?, ?);
             """,
             int(session["user_id"]),
             symbol,
-            shares
+            shares,
+            float(stock["price"])
         )       
 
         return redirect("/")
@@ -183,7 +253,7 @@ def quote():
 
         stock = lookup(symbol)
         if not stock:
-            return apology(f"Stock symbol '{stock}' does not exist")
+            return apology(f"Stock symbol '{symbol}' does not exist")
 
         return render_template("quoted.html", stock=stock, usd=usd)
 
@@ -238,4 +308,115 @@ def register():
 @login_required
 def sell():
     """Sell shares of stock"""
-    return apology("TODO")
+
+    # GET route
+    if request.method == "GET":
+        user_rows = db.execute(
+            "SELECT cash FROM users WHERE id = ?",
+            session["user_id"]
+        )
+        cash = float(user_rows[0]["cash"])
+        return render_template("sell.html", usd=usd, cash=cash)
+
+    # POST route
+    if request.method == "POST":
+
+        # Validate stock `symbol` form field
+        symbol = request.form.get("symbol")
+        if len(symbol) == 0:
+            return apology("Stock symbol cannot be blank")
+
+        symbol = symbol.upper()
+        stock = lookup(symbol)
+        if not stock:
+            return apology(f"Stock symbol '{symbol}' does not exist")
+
+        # Validate stock `shares` form field
+        shares = request.form.get("shares")
+        if not shares or not shares.isdigit():
+            return apology("Invalid share amount")
+
+        shares = int(shares)
+        if shares < 1:
+            return apology("Must sell at least 1 share")
+
+        # Stop transaction if user doesn't own the 
+
+        # Stop transaction if user doesn't own at least `shares` amount of the stock shares
+        owned_shares = db.execute(
+            """
+            SELECT shares FROM user_stocks
+            WHERE user_id = ? AND stock_symbol = ?;
+            """,
+            int(session["user_id"]),
+            symbol
+        )
+        if len(owned_shares) < 1:
+            return apology(
+                f"You don't own any shares of '{symbol}'"
+            )
+
+        owned_shares = owned_shares[0]["shares"]
+        if shares > owned_shares:
+            return apology(
+                f"You don't own enough share(s) of '{symbol}' to sell {shares} of them"
+            )
+
+        # Add stock sell-off to user's cash
+        holding_value = stock["price"] * shares
+        db.execute(
+            "UPDATE users SET cash = (cash + ?) WHERE id = ?",
+            holding_value,
+            int(session["user_id"])
+        )
+
+        # Add a record if the user doesn't own the share already
+        rows = db.execute(
+            """
+            SELECT COUNT(*) FROM user_stocks
+            WHERE user_id = ? AND stock_symbol = ?;
+            """,
+            int(session["user_id"]),
+            symbol
+        )
+        has_no_shares = rows[0]["COUNT(*)"] < 1
+
+        if has_no_shares:
+            db.execute(
+                """
+                INSERT INTO user_stocks (
+                    user_id, stock_symbol, shares
+                )
+                VALUES (?, ?, 0)
+                """,
+                int(session["user_id"]),
+                symbol
+            )
+
+        # Record the number of shares sold under the user
+        db.execute(
+            """
+            UPDATE user_stocks
+            SET shares = (shares - ?)
+            WHERE user_id = ? AND stock_symbol = ?;
+            """,
+            shares,
+            int(session["user_id"]),
+            symbol
+        )
+
+        # Log the stock purchase transaction
+        db.execute(
+            """
+            INSERT INTO user_transactions(
+                user_id, action, stock_symbol, shares, price
+            )
+            VALUES(?, 'sell', ?, ?, ?);
+            """,
+            int(session["user_id"]),
+            symbol,
+            shares,
+            float(stock["price"])
+        )       
+
+        return redirect("/")

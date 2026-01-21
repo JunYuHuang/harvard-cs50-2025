@@ -32,14 +32,29 @@ CREATE TABLE user_transactions(
     action TEXT NOT NULL,
     stock_symbol TEXT NOT NULL,
     shares INTEGER NOT NULL,
+    price NUMERIC NOT NULL,
     created_at TEXT NOT NULL DEFAULT current_timestamp,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE user_stocks(
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    user_id INTEGER NOT NULL,
+    stock_symbol TEXT NOT NULL,
+    shares INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 ```
 
 ## Solution 1: brute force
 
-- test
+### Test SQL Queries
+
+```SQL
+SELECT stock_symbol AS symbol, shares
+FROM user_stocks
+WHERE user_id = 1;
+```
 
 ## Todos
 
@@ -58,8 +73,10 @@ CREATE TABLE user_transactions(
     - [x] add stock buy transaction if prerequisites met
         - [x] deduct stock purchase price from user's account in DB
         - [x] add new transaction "buy" purchase to transaction table in DB
-- [ ] Complete `/index` routes (GET)
-- [ ] Complete `/sell` routes (GET, POST)
+- [x] Complete `/index` routes (GET)
+    - [x] make it render an HTML table of 4 columns `Symbol`, `Shares`, `Price`, and `TOTAL` minus the last 2 rows that only show the `Cash` and `TOTAL` values
+- [x] Complete `/sell` routes (GET, POST)
+    - [x] basically the same as the `/buy` routes but in reverse
 - [ ] Complete `/history` routes (GET)
 - [ ] Complete 1+ of the following
     - [ ] Allow users to change their passwords.
