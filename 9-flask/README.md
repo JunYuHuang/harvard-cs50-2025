@@ -79,4 +79,4 @@
 ## Problem Set 9
 
 - [x] Complete [Birthdays](https://cs50.harvard.edu/x/psets/9/birthdays/)
-- [ ] Complete [Finance](https://cs50.harvard.edu/x/psets/9/finance/)
+- [x] Complete [Finance](https://cs50.harvard.edu/x/psets/9/finance/)

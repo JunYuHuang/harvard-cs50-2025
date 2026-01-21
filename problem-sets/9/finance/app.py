@@ -180,8 +180,25 @@ def buy():
 @login_required
 def history():
     """Show history of transactions"""
-    return apology("TODO")
 
+    # GET route
+    if request.method == "GET":
+        transactions = db.execute(
+            """
+            SELECT
+            action,
+            stock_symbol AS symbol,
+            shares,
+            price,
+            created_at AS date
+            FROM user_transactions
+            WHERE user_id = ?;
+            """,
+            int(session["user_id"])
+        )        
+        return render_template(
+            "history.html", transactions=transactions, usd=usd
+        )
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -420,3 +437,41 @@ def sell():
         )       
 
         return redirect("/")
+
+@app.route("/change_password", methods=["GET", "POST"])
+@login_required
+def change_password():
+    """Change the logged in user's password"""
+
+    # GET route
+    if request.method == "GET":
+        return render_template("change_password.html")
+
+    # POST route
+    if request.method == "POST":
+
+        # Validate `password` and `confirmation` fields
+        password = request.form.get("password")
+        confirmation = request.form.get("confirmation")
+
+        if len(password) == 0 or len(confirmation) == 0:
+            return apology("Password or confirmed password cannot be blank")
+
+        if password != confirmation:
+            return apology("Confirmed password does not match password")
+
+        # Update user's password in the database
+        password_hash = generate_password_hash(password)
+        try:
+            res = db.execute(
+                "UPDATE users SET hash = ? WHERE id = ?",
+                password_hash, int(session["user_id"])
+            )
+        except ValueError as e:
+            return apology("Error changing password")
+
+        # Force the user to log out
+        session.clear()
+
+        # Redirect user to home page
+        return redirect("/")    
