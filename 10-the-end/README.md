@@ -1,0 +1,88 @@
+# Week 10 Flask
+
+## Lecture Material
+
+- web page: https://cs50.harvard.edu/x/weeks/10
+- notes: https://cs50.harvard.edu/x/notes/10/
+- slides: https://cdn.cs50.net/cs50/fall/lectures/10/lecture9.pdf
+- topics:
+    - Fun. Games.
+
+## Notes
+
+- algorithm = precise sequence of steps for getting something done
+- important:
+    - precision
+    - correctness
+- programming = process of taking an algorithm and putting it into a language a computer can process
+- final project
+- CS50 stuff
+    - recursion
+    - Python
+    - duck
+    - boolean
+    - array
+    - loop
+    - pointer
+    - conditional
+    - overflow
+    - memory
+    - emoji
+    - tree
+    - phonebook
+    - Mario
+- Visual Studio Code: install on my own machine
+- command-line tools
+    - Apple XCode
+    - Windows WSL
+- Git
+- website hosting
+    - GitHub pages
+    - Netlify
+- web app hosting
+    - AWS
+    - Azure
+    - GCP
+    - Clouflare
+    - Heroku
+    - Vercel
+- Ask AI
+    - ChatGPT
+    - Claude
+    - Gemini
+    - CoPilot
+    - Codex
+    - v0
+- ask questions
+    - reddit.com/r/learnprogramming
+- read news
+    - tech crunch
+    - Y CCombinatory
+- more CS50 classes
+- CS50 quiz
+    - largest number an 8-bit unsigned integer can represent?
+        - 255
+    - issue at center of the Year 2038 problem?
+        - integer overflow
+    - not a step of compiling?
+        - interpreting
+    - a pointer stores what?
+        - memory address of a variable
+    - running time of linear search?
+        - O(n)
+    - data structure that follows the FIFO principle?
+        - queue
+    - operator that returns the memory address of a variable (in C)?
+        - &
+    - SQL command used to remove duplicate rows from a result set?
+        - DISTINCT
+    - HTTP code 418 means?
+        - I'm a Teapot
+    - where does `malloc()` dynamically allocate memory from?
+        - heap
+    - in C, if you allocate memory with `malloc` but forget to call `free`, what problem can occur?
+        - memory leak
+    - purpose of DNS?
+        - translates domain names into IP addresses
+    - not a built-in SQL feature to tackle race conditions?
+        - ENROLL
